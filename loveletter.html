@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffe6e6; /* Light pink background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/427463348_3612577498980131_4177314924206146193_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeG3LelnUfoFOVeJm_F17LuaANPQwyrzyxYA09DDKvPLFnA1wlrturjxW9P9W-ML5TSQ_9s5KPnFaQR1r6LumJro&_nc_ohc=cfMfvUU8hqUAX_mULcy&_nc_ht=scontent.fceb3-1.fna&oh=00_AfDvXSUbHpcMo7JRjVyoX9W8am07Py_P4MYA8itP_56Bkg&oe=65CB94A6');
+    background-size: cover; /* Adjusted to cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-position: center; /* Center the background image within the viewport */
+}
+        .container {
+            text-align: center;
+            position: relative;
+            padding: 50px;
+            border: 2px solid #ff9999; /* Pink border */
+            background-color: #fff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        }
+
+        .letter-background {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            background-image: url('https://image.freepik.com/free-vector/valentine-s-day-letter_23-2148877402.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.3; /* Adjust opacity as desired */
+            border-radius: 10px;
+            visibility: hidden; /* Initially hidden */
+        }
+
+        .heart {
+            cursor: pointer;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        .hidden {
+            opacity: 0;
+            display: none;
+            transform: translateY(-50%) scale(0);
+            transform-origin: top;
+        }
+
+        .visible {
+            animation: revealMessage 0.5s forwards, heartMove 0.5s forwards, heartAppear 0.5s forwards;
+        }
+
+        @keyframes revealMessage {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartMove {
+            0% {
+                transform: translateY(-50%) scale(0);
+            }
+            100% {
+                transform: translateY(50%);
+            }
+        }
+
+        @keyframes heartAppear {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Custom styling for the message */
+        #message {
+            margin-top: 20px;
+            padding: 20px;
+            position: relative; /* Added */
+            top: calc(-50px - 100px); /* Adjust as needed */
+            overflow-y: auto; /* Enable vertical scroll */
+            max-height: 300px; /* Set a max height for the message container */
+        }
+
+        /* Custom styling for the heart icon */
+        .heart img {
+            border-radius: 50%; /* Make the heart icon circular */
+            border: 2px solid #ff4d4d; /* Pink border */
+        }
+
+        /* Custom styling for the love letter */
+        .love-letter {
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border: 2px solid #de0c0c; /* Pink border */
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+            z-index: 2; /* Make it appear above other elements */
+        }
+
+        .opened {
+            display: block;
+            animation: openLetter 1s forwards;
+        }
+
+        @keyframes openLetter {
+            0% {
+                transform: translate(-50%, -50%) rotateX(-90deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        #heart2 {
+    cursor: pointer;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    display: none; /* Initially hidden */
+    position: absolute; /* Position it absolutely */
+    bottom: -15px; /* Adjust the distance from the bottom as needed */
+    right: 170px; /* Position it at the bottom right corner */
+    transform: translate(-50%, 50%); /* Center it vertically and horizontally */
+    z-index: 2; /* Ensure it appears above other elements */
+}
+
+
+        #heart2:hover {
+            transform: scale(1.2);
+        }
+
+        #heart2 img {
+            border-radius: 50%;
+            border: 2px solid #ff4d4d;
+        }
+        #heartCollage {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; /* Make it appear above other elements */
+    height: 430px;
+    width:  520px;
+    animation: heartCollageAppear 1s ease forwards, fadeIn 1s ease forwards; /* Added animation */
+}
+
+@keyframes heartCollageAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="letter-background"></div>
+        <div id="heart" class="heart">
+            <img src="https://cdn-icons-png.freepik.com/512/2589/2589054.png" alt="Heart Icon" width="100" height="100">
+        </div>
+        <div id="message" class="hidden">
+            <!-- Your love letter message content here -->
+        </div>
+    </div>
+
+    <div class="love-letter" id="loveLetter">
+        <!-- Your love letter content here -->
+        <h1>Hi love,</h1>
+        <p>To me, art is a profound expression of the human experience—a medium through which individuals can convey their deepest thoughts, emotions, and aspirations. It transcends the boundaries of language and culture, speaking to the universal truths and complexities of life. Art has the power to ignite imagination, provoke introspection, and inspire transformation.
+
+            Beyond its aesthetic beauty, art serves as a reflection of society, offering insights into the values, beliefs, and struggles of different eras and communities. It has the ability to challenge perspectives, stimulate dialogue, and foster empathy by inviting viewers to engage with diverse narratives and interpretations. Whether through painting, sculpture, music, or literature, each artwork carries the imprint of its creator's unique vision, inviting viewers to embark on a journey of discovery and self-reflection.
+            
+            Moreover, art serves as a catalyst for personal growth and social change. It encourages us to confront our fears, embrace vulnerability, and explore the depths of our own humanity. Through art, we can confront difficult truths, celebrate diversity, and envision a more inclusive and compassionate world.
+            
+            In essence, art is a source of inspiration, solace, and connection—a testament to the boundless creativity and resilience of the human spirit. It reminds us of our shared humanity and the transformative power of creativity, encouraging us to embrace life's complexities with curiosity, courage, and compassion.
+            
+            
+            
+            </p>
+        <div id="heart2">
+            <img src="https://cdn-icons-png.freepik.com/512/2589/2589054.png" alt="Heart Icon" width="100" height="100">
+        </div>
+    
+    </div>
+
+    <!-- Heart collage picture -->
+    <img id="heartCollage" src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/427540178_3612577565646791_2283218076595312171_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeF8MFWsMsr5YDMhJZX0kKDoznfJdVahcnbOd8l1VqFydoVAs4AfLC3sB5_gMaEKFo5rOzWRp4J38n_sI4_iu2ew&_nc_ohc=EvhiuipTFfkAX8Cg-zZ&_nc_ht=scontent.fceb3-1.fna&oh=00_AfAVZw3s_3yuRPpLtQQzmmxQiQ4g2adp3-2RAVtrFErohw&oe=65CBD7ED" alt="Heart Collage" width="300" height="300">
+
+    <script>
+        document.getElementById('heart').addEventListener('click', function() {
+            var message = document.getElementById('message');
+            var background = document.querySelector('.letter-background');
+            var loveLetter = document.getElementById('loveLetter');
+            var heart2 = document.getElementById('heart2');
+
+            message.classList.toggle('hidden');
+            message.classList.toggle('visible');
+            background.style.visibility = message.classList.contains('visible') ? 'visible' : 'hidden';
+            loveLetter.classList.toggle('opened');
+
+            // Show the second heart button after revealing the message
+            heart2.style.display = 'inline-block';
+        });
+
+        document.getElementById('heart2').addEventListener('click', function() {
+            var heartCollage = document.getElementById('heartCollage');
+            heartCollage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
